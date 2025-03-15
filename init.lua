@@ -9,4 +9,12 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require 'vim-options'
-require('lazy').setup 'plugins'
+require('lazy').setup {
+  { import = 'plugins.ai' },
+  { import = 'plugins.formatting' },
+  { import = 'plugins.git' },
+  { import = 'plugins.lsp' },
+  { import = 'plugins.ui' },
+}
+
+require 'keybindings'
