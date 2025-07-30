@@ -53,6 +53,13 @@ require("todo-comments").setup {
 }
 
 -- keymaps
+local groups =
+{
+	{ '<leader>s', group = '[S]earch' },
+	{ '<leader>l', group = '[L]anguage Server' },
+	{ '<leader>c', group = '[C]lose' },
+}
+
 local keymaps =
 {
 	-- general
@@ -89,6 +96,8 @@ local keymaps =
 for _, map in ipairs(keymaps) do
 	vim.keymap.set(map[1], map[2], map[3], map[4])
 end
+
+require("which-key").add(groups)
 
 -- language servers
 local lsps =
