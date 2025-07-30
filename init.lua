@@ -17,7 +17,7 @@ vim.g.mapleader = " "
 local keymaps =
 {
 	-- general
-	{ 'n', '<leader>o',  ':update<CR> :source<CR>', { silent = true, desc = "Save and source file" } },
+	{ 'n', '<leader>o',  ':update<CR> :source<CR>',  { silent = true, desc = "Save and source file" } },
 	{ 'n', '<leader>w',  ':write<CR>',              { silent = true, desc = "Write file" } },
 	{ 'n', '<leader>q',  ':quit<CR>',               { silent = true, desc = "Quit" } },
 
@@ -43,18 +43,7 @@ vim.pack.add(
 		{ src = "https://github.com/nvim-tree/nvim-tree.lua" },
 
 		-- git
-		{
-			src = "https://github.com/lewis6991/gitsigns.nvim",
-			opts = {
-				signs = {
-					add = { text = '+' },
-					change = { text = '~' },
-					delete = { text = '_' },
-					topdelete = { text = '‾' },
-					changedelete = { text = '~' },
-				}
-			}
-		},
+		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 
 		-- C#
 		{ src = "https://github.com/seblyng/roslyn.nvim" },
