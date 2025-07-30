@@ -1,20 +1,17 @@
 vim.o.number = true         -- display line numbers
 vim.o.relativenumber = true -- display relative line numbers
 vim.o.signcolumn = "yes"    -- always show the sign column
-
 vim.o.wrap = false          -- disable line wrapping
-
 vim.o.tabstop = 4           -- a tab should LOOK like 4 characters
 vim.o.softtabstop = 4       -- a tab should insert 1 tab ( equivilent of 4 spaces )
 vim.o.shiftwidth = 4        -- a tab should insert 1 column ( equivilent of 4 spaces)
 vim.o.expandtab = false     -- use tabs not spaces
 vim.o.autoindent = true     -- automatically copy the indentation of the current line when starting a new line
-
+vim.o.splitbelow = true     -- ensure horizontal splits are opened below
+vim.o.splitright = true     -- ensure vertical splits are opened to the right
 vim.o.swapfile = false      -- disable creation of swapfiles
-vim.g.mapleader = " "
 
-vim.o.splitbelow = true		-- ensure horizontal splits are opened below
-vim.o.splitright = true		-- ensure vertical splits are opened to the right
+vim.g.mapleader = " "
 
 -- packages
 vim.pack.add(
