@@ -46,6 +46,7 @@ vim.pack.add(
 
 		-- misc
 		{ src = "https://github.com/folke/todo-comments.nvim" },
+		{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 	});
 
 require("nvim-tree").setup {}
