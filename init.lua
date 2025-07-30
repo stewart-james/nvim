@@ -11,37 +11,7 @@ vim.o.expandtab = false     -- use tabs not spaces
 vim.o.autoindent = true     -- automatically copy the indentation of the current line when starting a new line
 
 vim.o.swapfile = false      -- disable creation of swapfiles
-
--- keymaps
 vim.g.mapleader = " "
-local keymaps =
-{
-	-- general
-	{ 'n', '<leader>o',        ':update<CR> :source<CR>',                { silent = true, desc = "Save and source file" } },
-	{ 'n', '<leader>w',        ':write<CR>',                             { silent = true, desc = "Write file" } },
-	{ 'n', '<leader>q',        ':quit<CR>',                              { silent = true, desc = "Quit" } },
-
-	-- search
-	{ 'n', '<leader>sf',       require("telescope.builtin").find_files,  { desc = "[S]earch [F]iles" } },
-	{ 'n', '<leader>st',       require("telescope.builtin").git_files,   { desc = "[S]earch GitT] Files" } },
-	{ 'n', '<leader>sh',       require("telescope.builtin").help_tags,   { desc = "[S]earch [H]elp" } },
-	{ 'n', '<leader>sk',       require("telescope.builtin").keymaps,     { desc = "[S]earch [K]eymaps" } },
-	{ 'n', '<leader>sg',       require("telescope.builtin").live_grep,   { desc = "[S]earch [G]rep" } },
-	{ 'n', '<leader>sd',       require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" } },
-	{ 'n', '<leader>sr',       require("telescope.builtin").oldfiles,    { desc = "[S]earch [R]ecent Files" } },
-	{ 'n', '<leader><leader>', require("telescope.builtin").buffers,    { desc = "[ ] Find existing buffers" } },
-
-	-- language server
-	{ 'n', '<leader>lf',       vim.lsp.buf.format,                       { desc = "LSP Format buffer" } },
-	{ 'n', '<leader>lh',       vim.lsp.buf.hover,                        { desc = "LSP Hover" } },
-
-	-- file tree
-	{ 'n', '<leader>e',        ':NvimTreeToggle<CR>',                    { desc = "Open Tree [E]xplorer" } },
-}
-
-for _, map in ipairs(keymaps) do
-	vim.keymap.set(map[1], map[2], map[3], map[4])
-end
 
 -- packages
 vim.pack.add(
@@ -68,6 +38,35 @@ vim.pack.add(
 		-- C#
 		{ src = "https://github.com/seblyng/roslyn.nvim" },
 	});
+
+-- keymaps
+local keymaps =
+{
+	-- general
+	{ 'n', '<leader>o',        ':update<CR> :source<CR>',                { silent = true, desc = "Save and source file" } },
+	{ 'n', '<leader>w',        ':write<CR>',                             { silent = true, desc = "Write file" } },
+	{ 'n', '<leader>q',        ':quit<CR>',                              { silent = true, desc = "Quit" } },
+
+	-- search
+	{ 'n', '<leader>sf',       require("telescope.builtin").find_files,  { desc = "[S]earch [F]iles" } },
+	{ 'n', '<leader>st',       require("telescope.builtin").git_files,   { desc = "[S]earch GitT] Files" } },
+	{ 'n', '<leader>sh',       require("telescope.builtin").help_tags,   { desc = "[S]earch [H]elp" } },
+	{ 'n', '<leader>sk',       require("telescope.builtin").keymaps,     { desc = "[S]earch [K]eymaps" } },
+	{ 'n', '<leader>sg',       require("telescope.builtin").live_grep,   { desc = "[S]earch [G]rep" } },
+	{ 'n', '<leader>sd',       require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" } },
+	{ 'n', '<leader>sr',       require("telescope.builtin").oldfiles,    { desc = "[S]earch [R]ecent Files" } },
+
+	-- language server
+	{ 'n', '<leader>lf',       vim.lsp.buf.format,                       { desc = "LSP Format buffer" } },
+	{ 'n', '<leader>lh',       vim.lsp.buf.hover,                        { desc = "LSP Hover" } },
+
+	-- file tree
+	{ 'n', '<leader>e',        ':NvimTreeToggle<CR>',                    { desc = "Open Tree [E]xplorer" } },
+}
+
+for _, map in ipairs(keymaps) do
+	vim.keymap.set(map[1], map[2], map[3], map[4])
+end
 
 -- language servers
 local lsps =
