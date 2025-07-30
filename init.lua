@@ -43,6 +43,7 @@ vim.pack.add(
 		-- C#
 		{ src = "https://github.com/seblyng/roslyn.nvim" },
 		{ src = "https://github.com/GustavEikaas/easy-dotnet.nvim" },
+		{ src = "https://github.com/DestopLine/boilersharp.nvim" },
 
 		-- misc
 		{ src = "https://github.com/folke/todo-comments.nvim" },
@@ -53,6 +54,7 @@ require("nvim-tree").setup {}
 require("todo-comments").setup {
 	signs = true
 }
+require("boilersharp").setup {}
 require("easy-dotnet").setup {
 	test_runner = {
 		viewmode = "vsplit",
@@ -178,7 +180,8 @@ require('nvim-treesitter.configs').setup {
 		"vimdoc",
 		"query",
 		"markdown",
-		"markdown_inline"
+		"markdown_inline",
+		"xml"
 	},
 
 	auto_install = false, -- do not automatically install missing parsers
