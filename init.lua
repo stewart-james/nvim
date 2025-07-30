@@ -17,7 +17,7 @@ vim.g.mapleader = " "
 local keymaps =
 {
 	-- general
-	{ 'n', '<leader>o',  ':update<CR> :source<CR>',  { silent = true, desc = "Save and source file" } },
+	{ 'n', '<leader>o',  ':update<CR> :source<CR>', { silent = true, desc = "Save and source file" } },
 	{ 'n', '<leader>w',  ':write<CR>',              { silent = true, desc = "Write file" } },
 	{ 'n', '<leader>q',  ':quit<CR>',               { silent = true, desc = "Quit" } },
 
@@ -44,6 +44,12 @@ vim.pack.add(
 
 		-- git
 		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+
+		-- language servers
+		{
+			src = "https://github.com/nvim-treesitter/nvim-treesitter",
+			version = 'master'
+		},
 
 		-- C#
 		{ src = "https://github.com/seblyng/roslyn.nvim" },
@@ -73,6 +79,27 @@ for name, config in pairs(lsps) do
 	vim.lsp.config[name] = config
 	vim.lsp.enable(name)
 end
+
+-- treesitter --
+require('nvim-treesitter.configs').setup {
+	ensure_installed =
+	{
+		"c",
+		"c_sharp",
+		"lua",
+		"vim",
+		"vimdoc",
+		"query",
+		"markdown",
+		"markdown_inline"
+	},
+
+	auto_install = false, -- do not automatically install missing parsers
+
+	highlight = {
+		enable = true,
+	},
+}
 
 -- auto complete
 vim.cmd("set completeopt+=noselect")
