@@ -42,6 +42,8 @@ vim.pack.add(
 		{ src = "https://github.com/seblyng/roslyn.nvim" },
 	});
 
+require("nvim-tree").setup {}
+
 -- keymaps
 local keymaps =
 {
