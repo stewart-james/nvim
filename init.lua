@@ -106,7 +106,8 @@ local keymaps =
 	{ 'n', '<leader>w',        ':write<CR>',                             { silent = true, desc = "Write file" } },
 	{ 'n', '<leader>q',        ':quit<CR>',                              { silent = true, desc = "Quit" } },
 	{ 'n', '<leader>ct',       ':tabclose<CR>',                          { desc = "[C]lose [T]ab" } },
-	{ 'n', '<leader><tab>',    '<C-^>',                                   { noremap = true } },
+	{ 'n', '<leader><tab>',    '<C-^>',                                  { noremap = true } },
+	{ 't', '<leader>q',            [[<C-\><C-n>]],                            { noremap = true } },
 
 	-- search
 	{ 'n', '<leader>sf',       require("telescope.builtin").find_files,  { desc = "[S]earch [F]iles" } },
@@ -145,6 +146,12 @@ local keymaps =
 for _, map in ipairs(keymaps) do
 	vim.keymap.set(map[1], map[2], map[3], map[4])
 end
+
+require('telescope').setup({
+  defaults = {
+    path_display = { "smart" }
+  }
+})
 
 require("which-key").add(groups)
 
