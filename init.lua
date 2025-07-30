@@ -40,9 +40,15 @@ vim.pack.add(
 
 		-- C#
 		{ src = "https://github.com/seblyng/roslyn.nvim" },
+
+		-- misc
+		{ src = "https://github.com/folke/todo-comments.nvim" },
 	});
 
 require("nvim-tree").setup {}
+require("todo-comments").setup {
+	signs = true
+}
 
 -- keymaps
 local keymaps =
