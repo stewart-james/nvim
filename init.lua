@@ -65,6 +65,8 @@ local keymaps =
 	-- language server
 	{ 'n', '<leader>lf',       vim.lsp.buf.format,                       { desc = "LSP Format buffer" } },
 	{ 'n', '<leader>lh',       vim.lsp.buf.hover,                        { desc = "LSP Hover" } },
+	{ 'n', '<leader>ld',       vim.lsp.buf.definition,                   { desc = "Go to [D]efinition" } },
+	{ 'n', '<leader>li',       vim.lsp.buf.implementation,               { desc = "Go to [I]mplementation" } },
 
 	-- file tree
 	{ 'n', '<leader>e',        ':NvimTreeToggle<CR>',                    { desc = "Open Tree [E]xplorer" } },
