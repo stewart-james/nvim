@@ -17,16 +17,26 @@ vim.g.mapleader = " "
 local keymaps =
 {
 	-- general
-	{ 'n', '<leader>o',  ':update<CR> :source<CR>', { silent = true, desc = "Save and source file" } },
-	{ 'n', '<leader>w',  ':write<CR>',              { silent = true, desc = "Write file" } },
-	{ 'n', '<leader>q',  ':quit<CR>',               { silent = true, desc = "Quit" } },
+	{ 'n', '<leader>o',        ':update<CR> :source<CR>',                { silent = true, desc = "Save and source file" } },
+	{ 'n', '<leader>w',        ':write<CR>',                             { silent = true, desc = "Write file" } },
+	{ 'n', '<leader>q',        ':quit<CR>',                              { silent = true, desc = "Quit" } },
+
+	-- search
+	{ 'n', '<leader>sf',       require("telescope.builtin").find_files,  { desc = "[S]earch [F]iles" } },
+	{ 'n', '<leader>st',       require("telescope.builtin").git_files,   { desc = "[S]earch GitT] Files" } },
+	{ 'n', '<leader>sh',       require("telescope.builtin").help_tags,   { desc = "[S]earch [H]elp" } },
+	{ 'n', '<leader>sk',       require("telescope.builtin").keymaps,     { desc = "[S]earch [K]eymaps" } },
+	{ 'n', '<leader>sg',       require("telescope.builtin").live_grep,   { desc = "[S]earch [G]rep" } },
+	{ 'n', '<leader>sd',       require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" } },
+	{ 'n', '<leader>sr',       require("telescope.builtin").oldfiles,    { desc = "[S]earch [R]ecent Files" } },
+	{ 'n', '<leader><leader>', require("telescope.builtin").buffers,    { desc = "[ ] Find existing buffers" } },
 
 	-- language server
-	{ 'n', '<leader>lf', vim.lsp.buf.format,        { desc = "LSP Format buffer" } },
-	{ 'n', '<leader>lh', vim.lsp.buf.hover,         { desc = "LSP Hover" } },
+	{ 'n', '<leader>lf',       vim.lsp.buf.format,                       { desc = "LSP Format buffer" } },
+	{ 'n', '<leader>lh',       vim.lsp.buf.hover,                        { desc = "LSP Hover" } },
 
 	-- file tree
-	{ 'n', '<leader>e',  ':NvimTreeToggle<CR>',     { desc = "Open Tree [E]xplorer" } },
+	{ 'n', '<leader>e',        ':NvimTreeToggle<CR>',                    { desc = "Open Tree [E]xplorer" } },
 }
 
 for _, map in ipairs(keymaps) do
@@ -44,6 +54,10 @@ vim.pack.add(
 
 		-- git
 		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+
+		-- fuzzy find
+		{ src = "https://github.com/nvim-lua/plenary.nvim" },
+		{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 
 		-- language servers
 		{
