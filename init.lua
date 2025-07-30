@@ -72,7 +72,7 @@ local lsps =
 	roslyn = {
 		cmd = {
 			"dotnet",
-			"c:/projects/apps/lsp/roslyn/Microsoft.CodeAnalysis.LanguageServer.dll",
+			"c:/projects/tools/lsp/roslyn/content/LanguageServer/win-x64/Microsoft.CodeAnalysis.LanguageServer.dll",
 			"--logLevel=Information",
 			"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
 			"--stdio",

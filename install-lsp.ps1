@@ -68,9 +68,46 @@ function Download-And-Extract-Github-Release {
     }
 }
 
-# Download Lua Language Server
+function Download-LatestNuGetPackage {
+    param (
+        [string]$PackageName,
+        [string]$ExtractPath
+    )
+
+    $nugetUrl = "https://api.nuget.org/v3-flatcontainer/$PackageName/index.json"
+    $versions = Invoke-RestMethod -Uri $nugetUrl
+    $latestVersion = $versions.versions[-1]
+
+    Write-Host "Latest version of $PackageName is $latestVersion"
+
+    $nupkgUrl = "https://api.nuget.org/v3-flatcontainer/$PackageName/$latestVersion/$PackageName.$latestVersion.nupkg"
+    $fileName = "$PackageName.$latestVersion.nupkg"
+    $zipPath = Join-Path $env:TEMP $fileName
+
+    if (-not (Test-Path $zipPath)) {
+        Write-Host "Downloading $fileName..."
+        Invoke-WebRequest -Uri $nupkgUrl -OutFile $zipPath
+    } else {
+        Write-Host "Using cached $fileName"
+    }
+
+    # Rename nupkg to zip for Expand-Archive compatibility
+    $zipTempPath = [System.IO.Path]::ChangeExtension($zipPath, ".zip")
+    Copy-Item -Path $zipPath -Destination $zipTempPath -Force
+
+    Remove-Item $ExtractPath -Recurse -Force -ErrorAction Ignore
+    Expand-Archive -Path $zipTempPath -DestinationPath $ExtractPath -Force
+
+    Remove-Item $zipTempPath
+
+    Write-Host "Extracted $PackageName to $ExtractPath"
+}
+
+
 Download-And-Extract-Github-Release `
-    -Repo "LuaLS/lua-language-server" `
+	-Repo "LuaLS/lua-language-server" `
 	-AssetPattern "lua-language-server-.*-win32-x64.zip" `
-    -ExtractPath "C:\projects\tools\lsp\lua" `
+	-ExtractPath "C:\projects\tools\lsp\lua" `
 	-BinPath "C:\projects\tools\lsp\lua\bin"
+
+Download-LatestNuGetPackage -PackageName "Microsoft.CodeAnalysis.LanguageServer.win-x64" -ExtractPath "C:\projects\tools\lsp\roslyn"
