@@ -16,11 +16,17 @@ vim.o.swapfile = false      -- disable creation of swapfiles
 vim.g.mapleader = " "
 local keymaps =
 {
+	-- general
 	{ 'n', '<leader>o',  ':update<CR> :source<CR>', { silent = true, desc = "Save and source file" } },
 	{ 'n', '<leader>w',  ':write<CR>',              { silent = true, desc = "Write file" } },
 	{ 'n', '<leader>q',  ':quit<CR>',               { silent = true, desc = "Quit" } },
+
+	-- language server
 	{ 'n', '<leader>lf', vim.lsp.buf.format,        { desc = "LSP Format buffer" } },
 	{ 'n', '<leader>lh', vim.lsp.buf.hover,         { desc = "LSP Hover" } },
+
+	-- file tree
+	{ 'n', '<leader>e',  ':NvimTreeToggle<CR>',     { desc = "Open Tree [E]xplorer" } },
 }
 
 for _, map in ipairs(keymaps) do
@@ -30,12 +36,13 @@ end
 -- packages
 vim.pack.add(
 	{
-		-- Appearance
+		-- appearance
 		{ src = "https://github.com/catppuccin/nvim" },
 
-		-- Language server
-		{ src = "https://github.com/neovim/nvim-lspconfig" },
+		-- file tree
+		{ src = "https://github.com/nvim-tree/nvim-tree.lua" },
 
+		-- git
 		{
 			src = "https://github.com/lewis6991/gitsigns.nvim",
 			opts = {
@@ -48,9 +55,45 @@ vim.pack.add(
 				}
 			}
 		},
+
+		-- C#
+		{ src = "https://github.com/seblyng/roslyn.nvim" },
 	});
 
 -- language servers
-vim.lsp.enable({ "lua_ls" })
+local lsps =
+{
+	lua_ls = {
+		cmd = { 'lua-language-server' },
+		filetypes = { 'lua' },
+		root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
+	},
+
+	roslyn = {
+		cmd = {
+			"dotnet",
+			"c:/projects/apps/lsp/roslyn/Microsoft.CodeAnalysis.LanguageServer.dll",
+			"--logLevel=Information",
+			"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+			"--stdio",
+		},
+	}
+}
+
+for name, config in pairs(lsps) do
+	vim.lsp.config[name] = config
+	vim.lsp.enable(name)
+end
+
+-- auto complete
+vim.cmd("set completeopt+=noselect")
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client:supports_method('textDocument/completion') then
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+		end
+	end,
+})
 
 vim.cmd("colorscheme catppuccin")
