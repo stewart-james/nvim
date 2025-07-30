@@ -146,11 +146,7 @@ for _, map in ipairs(keymaps) do
 	vim.keymap.set(map[1], map[2], map[3], map[4])
 end
 
-vim.keymap.set('t', '<Esc>', function()
-  -- Send Ctrl-C to the terminal and then leave terminal mode
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), 't', true)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), 't', true)
-end, { desc = "Send <C-c> and exit terminal mode" })
+vim.cmd([[tnoremap <Esc> <C-\><C-n>:call feedkeys("\<C-c>")<CR>]])
 
 require('telescope').setup({
   defaults = {
