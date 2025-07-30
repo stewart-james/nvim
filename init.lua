@@ -59,6 +59,7 @@ local keymaps =
 	{ 'n', '<leader>o',        ':update<CR> :source<CR>',                { silent = true, desc = "Save and source file" } },
 	{ 'n', '<leader>w',        ':write<CR>',                             { silent = true, desc = "Write file" } },
 	{ 'n', '<leader>q',        ':quit<CR>',                              { silent = true, desc = "Quit" } },
+	{ 'n', '<leader>ct',       ':tabclose<CR>',                          { desc = "[C]lose [T]ab" } },
 
 	-- search
 	{ 'n', '<leader>sf',       require("telescope.builtin").find_files,  { desc = "[S]earch [F]iles" } },
