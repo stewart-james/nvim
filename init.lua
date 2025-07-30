@@ -29,6 +29,7 @@ vim.pack.add(
 		-- git
 		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 		{ src = "https://github.com/NeogitOrg/neogit" },
+		{ src = "https://github.com/sindrets/diffview.nvim" },
 
 		-- keymaps
 		{ src = "https://github.com/folke/which-key.nvim" },
