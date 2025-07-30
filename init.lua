@@ -107,7 +107,6 @@ local keymaps =
 	{ 'n', '<leader>q',        ':quit<CR>',                              { silent = true, desc = "Quit" } },
 	{ 'n', '<leader>ct',       ':tabclose<CR>',                          { desc = "[C]lose [T]ab" } },
 	{ 'n', '<leader><tab>',    '<C-^>',                                  { noremap = true } },
-	{ 't', '<leader>q',            [[<C-\><C-n>]],                            { noremap = true } },
 
 	-- search
 	{ 'n', '<leader>sf',       require("telescope.builtin").find_files,  { desc = "[S]earch [F]iles" } },
@@ -146,6 +145,12 @@ local keymaps =
 for _, map in ipairs(keymaps) do
 	vim.keymap.set(map[1], map[2], map[3], map[4])
 end
+
+vim.keymap.set('t', '<Esc>', function()
+  -- Send Ctrl-C to the terminal and then leave terminal mode
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), 't', true)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), 't', true)
+end, { desc = "Send <C-c> and exit terminal mode" })
 
 require('telescope').setup({
   defaults = {
