@@ -123,12 +123,12 @@ local keymaps =
 	{ 'n', '<leader>la',       vim.lsp.buf.code_action,                  { desc = "Code [A]ction" } },
 
 	-- dotnet stuff
-	{ 'n', '<leader>dr',       require("easy-dotnet").run,               { desc = "[D]otnet [R]un" } },
-	{ 'n', '<leader>db',       require("easy-dotnet").build,             { desc = "[D]otnet [B]uild" } },
+	{ 'n', '<leader>r',        require("easy-dotnet").run,               { desc = "[R]un" } },
+	{ 'n', '<leader>t',        require("easy-dotnet").testrunner,        { desc = "[T]est" } },
+	{ 'n', '<leader>c',        require("easy-dotnet").clean,             { desc = "[C]lean" } },
+	{ 'n', '<leader>b',        require("easy-dotnet").build,             { desc = "[B]uild" } },
 	{ 'n', '<leader>dbs',      require("easy-dotnet").build_solution,    { desc = "[D]otnet [B]uild [S]olution" } },
-	{ 'n', '<leader>dc',       require("easy-dotnet").clean,             { desc = "[D]otnet [C]lean" } },
 	{ 'n', '<leader>dnr',      require("easy-dotnet").restore,           { desc = "[D]otnet [N]uget [R]estore" } },
-	{ 'n', '<leader>dtr',      require("easy-dotnet").testrunner,        { desc = "[D]otnet [T]est [R]unner" } },
 	{ 'n', '<leader>dts',      require("easy-dotnet").test_solution,     { desc = "[D]otnet [T]est [S]olution" } },
 
 	-- git
