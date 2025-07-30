@@ -22,12 +22,13 @@ vim.pack.add(
 		-- file tree
 		{ src = "https://github.com/nvim-tree/nvim-tree.lua" },
 
-		-- git
-		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-
 		-- fuzzy find
 		{ src = "https://github.com/nvim-lua/plenary.nvim" },
 		{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+
+		-- git
+		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+		{ src = "https://github.com/NeogitOrg/neogit" },
 
 		-- keymaps
 		{ src = "https://github.com/folke/which-key.nvim" },
@@ -75,6 +76,9 @@ local keymaps =
 	{ 'n', '<leader>li',       vim.lsp.buf.implementation,               { desc = "Go to [I]mplementation" } },
 	{ 'n', '<leader>lr',       vim.lsp.buf.rename,                       { desc = "[R]ename" } },
 	{ 'n', '<leader>la',       vim.lsp.buf.code_action,                  { desc = "Code [A]ction" } },
+
+	-- git
+	{ 'n', '<leader>n',        ':Neogit<CR>',                            { desc = "[N]eogit" } },
 
 	-- file tree
 	{ 'n', '<leader>e',        ':NvimTreeToggle<CR>',                    { desc = "Open Tree [E]xplorer" } },
