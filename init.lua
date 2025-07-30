@@ -13,6 +13,9 @@ vim.o.autoindent = true     -- automatically copy the indentation of the current
 vim.o.swapfile = false      -- disable creation of swapfiles
 vim.g.mapleader = " "
 
+vim.o.splitbelow = true		-- ensure horizontal splits are opened below
+vim.o.splitright = true		-- ensure vertical splits are opened to the right
+
 -- packages
 vim.pack.add(
 	{
@@ -42,6 +45,7 @@ vim.pack.add(
 
 		-- C#
 		{ src = "https://github.com/seblyng/roslyn.nvim" },
+		{ src = "https://github.com/GustavEikaas/easy-dotnet.nvim" },
 
 		-- misc
 		{ src = "https://github.com/folke/todo-comments.nvim" },
@@ -50,6 +54,38 @@ vim.pack.add(
 require("nvim-tree").setup {}
 require("todo-comments").setup {
 	signs = true
+}
+require("easy-dotnet").setup {
+	test_runner = {
+		viewmode = "vsplit",
+		vsplit_width = 50,
+		vsplit = "topright",
+	},
+	terminal = function(path, action, args)
+		local commands = {
+			run = function()
+				return string.format("dotnet run --project %s %s", path, args)
+			end,
+			test = function()
+				return string.format("dotnet test %s %s", path, args)
+			end,
+			restore = function()
+				return string.format("dotnet restore %s %s", path, args)
+			end,
+			build = function()
+				return string.format("dotnet build %s %s", path, args)
+			end,
+			watch = function()
+				return string.format("dotnet watch --project %s %s", path, args)
+			end
+		}
+
+		local command = commands[action]() .. "\r"
+		vim.cmd("split")
+		vim.cmd("resize 30")
+		vim.cmd("term " .. command)
+	end,
+
 }
 
 -- keymaps
@@ -85,6 +121,15 @@ local keymaps =
 	{ 'n', '<leader>li',       vim.lsp.buf.implementation,               { desc = "Go to [I]mplementation" } },
 	{ 'n', '<leader>lr',       vim.lsp.buf.rename,                       { desc = "[R]ename" } },
 	{ 'n', '<leader>la',       vim.lsp.buf.code_action,                  { desc = "Code [A]ction" } },
+
+	-- dotnet stuff
+	{ 'n', '<leader>dr',       require("easy-dotnet").run,               { desc = "[D]otnet [R]un" } },
+	{ 'n', '<leader>db',       require("easy-dotnet").build,             { desc = "[D]otnet [B]uild" } },
+	{ 'n', '<leader>dbs',      require("easy-dotnet").build_solution,    { desc = "[D]otnet [B]uild [S]olution" } },
+	{ 'n', '<leader>dc',       require("easy-dotnet").clean,             { desc = "[D]otnet [C]lean" } },
+	{ 'n', '<leader>dnr',      require("easy-dotnet").restore,           { desc = "[D]otnet [N]uget [R]estore" } },
+	{ 'n', '<leader>dtr',      require("easy-dotnet").testrunner,        { desc = "[D]otnet [T]est [R]unner" } },
+	{ 'n', '<leader>dts',      require("easy-dotnet").test_solution,     { desc = "[D]otnet [T]est [S]olution" } },
 
 	-- git
 	{ 'n', '<leader>n',        ':Neogit<CR>',                            { desc = "[N]eogit" } },
