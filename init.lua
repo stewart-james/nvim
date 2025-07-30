@@ -10,6 +10,8 @@ vim.o.autoindent = true     -- automatically copy the indentation of the current
 vim.o.splitbelow = true     -- ensure horizontal splits are opened below
 vim.o.splitright = true     -- ensure vertical splits are opened to the right
 vim.o.swapfile = false      -- disable creation of swapfiles
+vim.o.title = true
+vim.o.titlestring = [[%t – %{fnamemodify(getcwd(), ':t')}]]
 
 vim.g.mapleader = " "
 
