@@ -67,6 +67,8 @@ local keymaps =
 	{ 'n', '<leader>lh',       vim.lsp.buf.hover,                        { desc = "LSP Hover" } },
 	{ 'n', '<leader>ld',       vim.lsp.buf.definition,                   { desc = "Go to [D]efinition" } },
 	{ 'n', '<leader>li',       vim.lsp.buf.implementation,               { desc = "Go to [I]mplementation" } },
+	{ 'n', '<leader>lr',       vim.lsp.buf.rename,                       { desc = "[R]ename" } },
+	{ 'n', '<leader>la',       vim.lsp.buf.code_action,                  { desc = "Code [A]ction" } },
 
 	-- file tree
 	{ 'n', '<leader>e',        ':NvimTreeToggle<CR>',                    { desc = "Open Tree [E]xplorer" } },
